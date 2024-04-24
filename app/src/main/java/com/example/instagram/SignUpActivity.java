@@ -9,6 +9,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -89,7 +90,9 @@ public class SignUpActivity extends AppCompatActivity {
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
-                                                Toast.makeText(SignUpActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
+                                                startActivity(intent);
+                                                finish();
                                             }
                                         });
                             }else {
