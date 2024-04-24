@@ -20,10 +20,9 @@ import com.example.instagram.databinding.ActivitySignUpBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.Firebase;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.instagram.Utils.Utils;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 
@@ -43,7 +42,17 @@ public class SignUpActivity extends AppCompatActivity {
                 @Override
                 public void onActivityResult(Uri uri) {
                     if (uri != null) {
-                        user.setImage((uploadImage(uri, USER_PROFILE_FOLDER)));
+                        uploadImage(uri, USER_PROFILE_FOLDER, new Utils.ImageUploadCallback() {
+                            @Override
+                            public void onImageUploaded(String imageUrl) {
+                                if (imageUrl == null) {
+
+                                } else {
+                                    user.setImage(imageUrl);
+                                    binding.profileImage.setImageURI(uri);
+                                }
+                            }
+                        });
                     }
                 }
             });
@@ -89,6 +98,13 @@ public class SignUpActivity extends AppCompatActivity {
                         }
                     });
                 }
+            }
+        });
+
+        binding.addImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launcher.launch("image/*");
             }
         });
     }

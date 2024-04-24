@@ -2,29 +2,27 @@ package com.example.instagram.Utils;
 
 import android.net.Uri;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.UploadTask;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.UUID;
 
 public class Utils {
-    public static String uploadImage(Uri uri, String folderName) {
+    public static void uploadImage(Uri uri, String folderName, final ImageUploadCallback callback) {
         final String[] imageUrl = {null};
-        FirebaseStorage.getInstance().getReference(folderName).child(UUID.randomUUID().toString())
+        FirebaseStorage.getInstance().getReference(folderName)
+                .child(UUID.randomUUID().toString())
                 .putFile(uri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                imageUrl[0] = uri.toString();
-                            }
-                        });
-                    }
+                .addOnSuccessListener(taskSnapshot -> {
+                    taskSnapshot.getStorage().getDownloadUrl()
+                            .addOnSuccessListener(uri1 -> {
+                                imageUrl[0] = uri1.toString();
+                                callback.onImageUploaded(imageUrl[0]);
+                            });
                 });
+    }
 
-        return imageUrl[0];
+    public interface ImageUploadCallback {
+        void onImageUploaded(String imageUrl);
     }
 }
