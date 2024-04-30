@@ -56,5 +56,13 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+        binding.btnCNA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
+                finish();
+            }
+        });
     }
 }
