@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.Toast;
 
@@ -64,7 +65,8 @@ public class SignUpActivity extends AppCompatActivity {
         binding = ActivitySignUpBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         user = new User();
-
+        String text = "<font color=#FF000000>Already have an Account</font> <font color=#1E88E5>Login ?</font>";
+        binding.login.setText(Html.fromHtml(text));
 
         binding.btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +110,15 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 launcher.launch("image/*");
+            }
+        });
+
+        binding.login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
