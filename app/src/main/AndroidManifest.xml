@@ -17,7 +17,7 @@
             android:exported="false" />
         <activity
             android:name=".HomeActivity"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"></activity>
+            ></activity>
         <activity
             android:name=".SignUpActivity"
             android:exported="false" />
