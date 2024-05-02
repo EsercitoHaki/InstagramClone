@@ -9,7 +9,7 @@
         android:name="com.example.instagram.Fragments.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
-    <fragment
+    <dialog
         android:id="@+id/add"
         android:name="com.example.instagram.Fragments.AddFragment"
         android:label="fragment_add"
