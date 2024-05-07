@@ -47,9 +47,7 @@ public class SignUpActivity extends AppCompatActivity {
                         uploadImage(uri, USER_PROFILE_FOLDER, new Utils.ImageUploadCallback() {
                             @Override
                             public void onImageUploaded(String imageUrl) {
-                                if (imageUrl == null) {
-
-                                } else {
+                                if (imageUrl != null) {
                                     user.setImage(imageUrl);
                                     binding.profileImage.setImageURI(uri);
                                 }

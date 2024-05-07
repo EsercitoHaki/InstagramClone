@@ -1,10 +1,19 @@
 package com.example.instagram.Post;
 
+import static com.example.instagram.Utils.Constant.POST_FOLDER;
+import static com.example.instagram.Utils.Constant.USER_PROFILE_FOLDER;
+import static com.example.instagram.Utils.Utils.uploadImage;
+
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.instagram.Utils.Utils;
 import com.example.instagram.databinding.ActivityPostBinding;
 
 
@@ -16,6 +25,23 @@ public class PostActivity extends AppCompatActivity {
         }
         return binding;
     }
+
+    private ActivityResultLauncher<String> launcher = registerForActivityResult(new ActivityResultContracts.GetContent(),
+            new ActivityResultCallback<Uri>() {
+                @Override
+                public void onActivityResult(Uri uri) {
+                    if (uri != null) {
+                        uploadImage(uri, POST_FOLDER, new Utils.ImageUploadCallback() {
+                            @Override
+                            public void onImageUploaded(String imageUrl1) {
+                                if (imageUrl1 != null) {
+                                    binding.selectImage.setImageURI(uri);
+                                }
+                            }
+                        });
+                    }
+                }
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +56,13 @@ public class PostActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        binding.selectImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launcher.launch("image/*");
             }
         });
     }

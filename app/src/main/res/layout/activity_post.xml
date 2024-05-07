@@ -18,16 +18,62 @@
         app:layout_constraintTop_toTopOf="parent"
         app:title="New Post" />
 
-    <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/imageView1"
-        android:scaleType="fitCenter"
-        android:src="@drawable/add"
-        app:layout_constraintEnd_toEndOf="parent"
+    <EditText
+        android:id="@+id/editTextMultiLine"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:gravity="top|start"
+        android:hint="Bạn đang nghĩ gì?"
+        android:inputType="textMultiLine"
+        android:minLines="5"
+        app:layout_constraintEnd_toEndOf="@+id/materialToolbar"
         app:layout_constraintStart_toStartOf="@+id/materialToolbar"
-        app:layout_constraintTop_toBottomOf="@+id/materialToolbar"
+        app:layout_constraintTop_toBottomOf="@+id/materialToolbar" />
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/selectImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/img"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toStartOf="@+id/materialToolbar"
+        app:layout_constraintTop_toBottomOf="@+id/editTextMultiLine"
         app:riv_border_color="#333333"
         app:riv_corner_radius="30dip"
-        app:riv_mutate_background="true"
+        app:riv_mutate_background="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_width="400dp"/>
+        android:layout_marginTop="180dp"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/selectImage">
+
+        <Button
+            android:id="@+id/btnPost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/pink"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:text="Đăng" />
+
+        <Button
+            android:id="@+id/btnCancel"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            app:strokeColor="@color/pink"
+            android:textColor="@android:color/darker_gray"
+            android:text="Huỷ" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
