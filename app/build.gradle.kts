@@ -53,6 +53,7 @@ dependencies {
     implementation("de.hdodenhof:circleimageview:3.1.0")
 
     implementation(platform("com.google.firebase:firebase-bom:32.8.1"))
+    implementation ("com.makeramen:roundedimageview:2.3.0")
     implementation ("com.squareup.picasso:picasso:2.8")
 
 }
