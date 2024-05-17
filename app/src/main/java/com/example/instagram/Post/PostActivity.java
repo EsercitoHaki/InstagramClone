@@ -17,6 +17,7 @@ import com.example.instagram.Models.Post;
 import com.example.instagram.Utils.Utils;
 import com.example.instagram.databinding.ActivityPostBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 
@@ -81,7 +82,14 @@ public class PostActivity extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        finish();
+                        FirebaseFirestore.getInstance().collection(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                .document().set(post)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        finish();
+                                    }
+                                });
                     }
                 });
 
