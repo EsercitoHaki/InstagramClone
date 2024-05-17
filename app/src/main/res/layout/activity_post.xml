@@ -19,28 +19,30 @@
         app:title="New Post" />
 
     <EditText
-        android:id="@+id/editTextMultiLine"
+        android:id="@+id/caption"
         android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:gravity="top|start"
+        android:padding="10dp"
         android:hint="Bạn đang nghĩ gì?"
         android:inputType="textMultiLine"
-        android:minLines="5"
+        android:background="@null"
+        android:minLines="3"
         app:layout_constraintEnd_toEndOf="@+id/materialToolbar"
         app:layout_constraintStart_toStartOf="@+id/materialToolbar"
         app:layout_constraintTop_toBottomOf="@+id/materialToolbar" />
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/selectImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="397dp"
+        android:layout_height="247dp"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
         android:src="@drawable/img"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="@+id/materialToolbar"
-        app:layout_constraintTop_toBottomOf="@+id/editTextMultiLine"
+        app:layout_constraintTop_toBottomOf="@+id/caption"
         app:riv_border_color="#333333"
         app:riv_corner_radius="30dip"
         app:riv_mutate_background="true" />
