@@ -9,9 +9,11 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.instagram.Utils.Utils;
 import com.example.instagram.databinding.ActivityPostBinding;
@@ -63,6 +65,13 @@ public class PostActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 launcher.launch("image/*");
+            }
+        });
+
+        binding.btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }
