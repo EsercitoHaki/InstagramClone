@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.instagram.Models.User;
+import com.example.instagram.Utils.FirebaseUtil;
 import com.example.instagram.databinding.ActivityLoginBinding;
 import com.example.instagram.databinding.ActivitySignUpBinding;
 import com.google.android.gms.tasks.OnCompleteListener;

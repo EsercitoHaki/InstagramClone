@@ -6,12 +6,13 @@ public class User {
     public User() {
     }
 
-    public User(String image, String name, String email, String password) {
+    public User(String image, String name, String email, String password ) {
         this.image = image;
         this.name = name;
         this.email = email;
         this.password = password;
     }
+
 
     public User(String name, String email, String password) {
         this.name = name;
