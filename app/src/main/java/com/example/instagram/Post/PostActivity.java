@@ -9,17 +9,19 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.instagram.HomeActivity;
 import com.example.instagram.Models.Post;
 import com.example.instagram.Utils.Utils;
 import com.example.instagram.databinding.ActivityPostBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
+
 
 
 public class PostActivity extends AppCompatActivity {
@@ -63,6 +65,7 @@ public class PostActivity extends AppCompatActivity {
         binding.materialToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(PostActivity.this, HomeActivity.class));
                 finish();
             }
         });
@@ -71,6 +74,14 @@ public class PostActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 launcher.launch("image/*");
+            }
+        });
+
+        binding.btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(PostActivity.this, HomeActivity.class));
+                finish();
             }
         });
 
@@ -87,6 +98,7 @@ public class PostActivity extends AppCompatActivity {
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void unused) {
+                                        startActivity(new Intent(PostActivity.this, HomeActivity.class));
                                         finish();
                                     }
                                 });

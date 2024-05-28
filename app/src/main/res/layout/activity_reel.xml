@@ -6,4 +6,72 @@
     android:layout_height="match_parent"
     tools:context=".Post.ReelActivity">
 
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/materialToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="New Reel" />
+
+    <EditText
+        android:id="@+id/caption"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:gravity="top|start"
+        android:padding="10dp"
+        android:hint="Bạn đang nghĩ gì?"
+        android:inputType="textMultiLine"
+        android:background="@null"
+        android:minLines="3"
+        app:layout_constraintEnd_toEndOf="@+id/materialToolbar"
+        app:layout_constraintStart_toStartOf="@+id/materialToolbar"
+        app:layout_constraintTop_toBottomOf="@+id/materialToolbar" />
+
+    <Button
+        android:id="@+id/selectReel"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Select Reel"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toStartOf="@+id/materialToolbar"
+        app:layout_constraintTop_toBottomOf="@+id/caption" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="180dp"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/selectReel">
+
+        <Button
+            android:id="@+id/btnPost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/pink"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:text="Đăng" />
+
+        <Button
+            android:id="@+id/btnCancel"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            app:strokeColor="@color/pink"
+            android:textColor="@android:color/darker_gray"
+            android:text="Huỷ" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
