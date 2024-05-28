@@ -88,15 +88,19 @@ public class ReelActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Reel reel = new Reel(videoUrl, binding.caption.getText().toString());
-                FirebaseFirestore.getInstance().collection(REEL).document().set(reel)
+                FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+                firestore.collection("REEL").document()
+                        .set(reel)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
-                            public void onSuccess(Void unused) {
-                                FirebaseFirestore.getInstance().collection(FirebaseAuth.getInstance().getCurrentUser().getUid() + REEL)
-                                        .document().set(reel)
+                            public void onSuccess(Void aVoid) {
+                                String currentUserUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+                                firestore.collection(currentUserUid + "REEL").document()
+                                        .set(reel)
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
-                                            public void onSuccess(Void unused) {
+                                            public void onSuccess(Void aVoid) {
                                                 startActivity(new Intent(ReelActivity.this, HomeActivity.class));
                                                 finish();
                                             }
