@@ -45,9 +45,9 @@ public class HomeFragment extends Fragment {
                     // Log ra khi item "message" được nhấn
                     Log.d(Constant.TAG, "Item 'message' clicked");
                     // Tiến hành chuyển đổi fragment
-                    SearchFragment searchFragment = new SearchFragment();
+                    ChatFragment chatFragment = new ChatFragment();
                     FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.frameLayout, searchFragment);
+                    transaction.replace(R.id.frameLayout, chatFragment);
                     transaction.addToBackStack(null);
                     transaction.commit();
 

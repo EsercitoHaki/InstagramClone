@@ -36,9 +36,9 @@ public class SearchFragment extends Fragment {
 
         binding.seachUsernameInput.requestFocus();
 
-//        binding.backBtn.setOnClickListener(v -> {
-//            requireActivity().onBackPressed();
-//        });
+        binding.backBtn.setOnClickListener(v -> {
+            requireActivity().onBackPressed();
+        });
 
         binding.searchUserBtn.setOnClickListener(v -> {
             String searchTerm = binding.seachUsernameInput.getText().toString();
