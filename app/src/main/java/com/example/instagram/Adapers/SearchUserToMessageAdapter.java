@@ -1,8 +1,11 @@
 package com.example.instagram.Adapers;
 
+import static java.security.AccessController.getContext;
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,12 +38,9 @@ public class SearchUserToMessageAdapter extends FirestoreRecyclerAdapter<User, S
 //        if(user.getEmail().equals(FirebaseUtil.getCurrentUserEmail())) {
 //            holder.usernameText.setText(user.getName() + " (Me)");
 //        }
-        Log.d("LoginActivity", "User ID: " + FirebaseUtil.currentUserId());
-
         if (user.getUserId() != null && user.getUserId().equals(FirebaseUtil.currentUserId())) {
             holder.usernameText.setText(user.getName() + " (Me)");
         }
-
         if (user.getImage() != null && !user.getImage().isEmpty()) {
             Uri profilePicUri = Uri.parse(user.getImage());
             AndroidUtil.setProfilePic(context, profilePicUri, holder.profilePic);
@@ -52,7 +52,14 @@ public class SearchUserToMessageAdapter extends FirestoreRecyclerAdapter<User, S
             Intent intent = new Intent(context, ChatActivity.class);
             AndroidUtil.passUserModelAsIntent(intent, user);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
+            // Ghi log về dữ liệu trong intent
+            String userId = intent.getStringExtra("userId");
+            if (userId != null) {
+                Log.d("LoginActivity", "User ID in intent: " + userId);
+            } else {
+                Log.d("LoginActivity", "User ID not found in intent.");
+            }
+            context.startActivity(intent); // Thay "this" thành "context" ở đây
         });
     }
 
