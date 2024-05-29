@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.instagram.ChatActivity;
 import com.example.instagram.Models.User;
 import com.example.instagram.R;
 import com.example.instagram.Utils.AndroidUtil;
@@ -30,6 +31,12 @@ public class SearchUserToMessageAdapter extends FirestoreRecyclerAdapter<User, S
     protected void onBindViewHolder(@NonNull SearchUserViewHolder holder, int position, @NonNull User user) {
         holder.usernameText.setText(user.getName());
         holder.phoneText.setText(user.getEmail());
+        if(user.getEmail().equals(FirebaseUtil.getCurrentUserEmail())) {
+            holder.usernameText.setText(user.getName() + " (Me)");
+        }
+//        if(user.getUserId().equals(FirebaseUtil.currentUserId())){
+//            holder.usernameText.setText(user.getName()+" (Me)");
+//        }
 
         if (user.getImage() != null && !user.getImage().isEmpty()) {
             Uri profilePicUri = Uri.parse(user.getImage());
@@ -38,14 +45,12 @@ public class SearchUserToMessageAdapter extends FirestoreRecyclerAdapter<User, S
             holder.profilePic.setImageResource(R.drawable.person_icon);
         }
 
-//        holder.itemView.setOnClickListener(v -> {
-//            // Handle item click event
-//            // Navigate to chat activity or any other desired activity
-//            Intent intent = new Intent(context, ChatActivity.class);
-//            AndroidUtil.passUserModelAsIntent(intent, user);
-//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//            context.startActivity(intent);
-//        });
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, ChatActivity.class);
+            AndroidUtil.passUserModelAsIntent(intent, user);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        });
     }
 
     @NonNull
