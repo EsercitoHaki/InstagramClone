@@ -18,7 +18,7 @@
         android:id="@+id/search"
         android:name="com.example.instagram.Fragments.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search_user" />
     <fragment
         android:id="@+id/reel"
         android:name="com.example.instagram.Fragments.ReelFragment"

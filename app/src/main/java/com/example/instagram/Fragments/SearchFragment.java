@@ -16,13 +16,13 @@ import com.example.instagram.Adapers.SearchUserToMessageAdapter;
 import com.example.instagram.Models.User;
 import com.example.instagram.R;
 import com.example.instagram.Utils.FirebaseUtil;
-import com.example.instagram.databinding.FragmentSearchBinding;
+import com.example.instagram.databinding.FragmentSearchUserBinding;
 import com.google.firebase.firestore.Query;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 public class SearchFragment extends Fragment {
 
-    private FragmentSearchBinding binding;
+    private FragmentSearchUserBinding binding;
     private SearchUserToMessageAdapter adapter;
 
     public SearchFragment() {
@@ -31,7 +31,7 @@ public class SearchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentSearchBinding.inflate(inflater, container, false);
+        binding = FragmentSearchUserBinding.inflate(inflater, container, false);
         View rootView = binding.getRoot();
 
         binding.seachUsernameInput.requestFocus();

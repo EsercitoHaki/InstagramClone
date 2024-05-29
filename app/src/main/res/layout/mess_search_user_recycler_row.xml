@@ -22,13 +22,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="User name"
-            android:textSize="18sp"
+            android:textSize="20dp"
+            android:textColor="@color/black"
             android:textStyle="bold"
             android:id="@+id/user_name_text"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="+000000000000"
+            android:text="email"
+            android:textColor="@color/my_secondary"
             android:id="@+id/phone_text"/>
 
     </LinearLayout>

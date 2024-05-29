@@ -28,13 +28,10 @@ public class ChatFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout using the binding
         binding = FragmentChatBinding.inflate(inflater, container, false);
-        View view = binding.getRoot(); // Get the root view from the binding
-
+        View view = binding.getRoot();
         recyclerView = view.findViewById(R.id.recyler_view);
 
-        // Setting OnClickListener for the back button
         binding.backBtn.setOnClickListener(v -> {
             requireActivity().onBackPressed();
         });

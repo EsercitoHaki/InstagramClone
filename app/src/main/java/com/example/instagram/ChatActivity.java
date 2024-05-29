@@ -1,5 +1,7 @@
 package com.example.instagram;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +19,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.instagram.Adapers.ChatRecyclerAdapter;
 import com.example.instagram.Models.ChatMessage;
 import com.example.instagram.Models.Chatroom;
@@ -30,6 +33,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.Query;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
@@ -68,10 +72,10 @@ public class ChatActivity extends AppCompatActivity {
 
         // Get UserModel
         otherUser = FirebaseUtil.getUserModelFromIntent(getIntent());
-
         if (otherUser != null) {
             Log.d(Constant.TAG, "Name from item: " + otherUser.getName());
             Log.d(Constant.TAG, "userId from item: " + otherUser.getUserId());
+            Log.d(Constant.TAG, " image " + otherUser.getImage());
         } else {
             Log.d(Constant.TAG, "No user data received from Intent");
         }
@@ -80,13 +84,39 @@ public class ChatActivity extends AppCompatActivity {
         chatroomId = FirebaseUtil.getChatroomId(FirebaseUtil.currentUserId(), otherUser.getUserId());
         Log.d(Constant.TAG, "ChatroomId: " + chatroomId);
 
-        FirebaseUtil.getOtherProfilePicStorageRef(otherUser.getUserId()).getDownloadUrl()
-                .addOnCompleteListener(t -> {
-                    if (t.isSuccessful()) {
-                        Uri uri = t.getResult();
-                        FirebaseUtil.setProfilePic(this, uri, binding.profilePicLayout.profilePicImageView);
-                    }
-                });
+        if (otherUser.getImage() != null && !otherUser.getImage().isEmpty()) {
+            FirebaseUtil.setProfilePic(this, Uri.parse(otherUser.getImage()), binding.profilePicLayout.profilePicImageView);
+        } else {
+            binding.profilePicLayout.profilePicImageView.setImageResource(R.drawable.person_icon);
+        }
+//        FirebaseUtil.getOtherProfilePicStorageRef(otherUser.getUserId()).getDownloadUrl()
+//                .addOnCompleteListener(task -> {
+//                    if (task.isSuccessful()) {
+//                        Uri uri = task.getResult();
+//                        if (uri != null) {
+//                            Log.d(Constant.TAG, "Download URL: " + uri.toString());
+//                            FirebaseUtil.setProfilePic(this, uri, binding.profilePicLayout.profilePicImageView);
+//                        } else {
+//                            Log.e(Constant.TAG, "Download URL is null");
+//                        }
+//                    } else {
+//                        Log.e(Constant.TAG, "Failed to retrieve download URL: " + task.getException());
+//                    }
+//                });
+
+//        FirebaseUtil.getOtherProfilePicStorageRef(otherUser.getUserId()).getDownloadUrl()
+//                .addOnCompleteListener(t -> {
+//                    if (t.isSuccessful()) {
+//                        Uri uri = t.getResult();
+//                        FirebaseUtil.setProfilePic(this, uri, binding.profilePicLayout.profilePicImageView);
+//                    }
+//                });
+
+
+
+
+
+
 
         binding.backBtn.setOnClickListener((v) -> {
             onBackPressed();

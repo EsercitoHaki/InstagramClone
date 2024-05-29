@@ -1,6 +1,5 @@
 package com.example.instagram.Fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,7 +7,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,11 +15,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.instagram.ChatActivity;
 import com.example.instagram.R;
 import com.example.instagram.Utils.Constant;
 import com.example.instagram.databinding.FragmentHomeBinding;
-import com.google.android.material.color.utilities.Contrast;
 
 public class HomeFragment extends Fragment {
 

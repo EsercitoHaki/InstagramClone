@@ -38,17 +38,19 @@ public class SearchUserToMessageAdapter extends FirestoreRecyclerAdapter<User, S
         if (user.getUserId() != null && user.getUserId().equals(FirebaseUtil.currentUserId())) {
             holder.usernameText.setText(user.getName() + " (Me)");
         }
+
         if (user.getImage() != null && !user.getImage().isEmpty()) {
             Uri profilePicUri = Uri.parse(user.getImage());
             FirebaseUtil.setProfilePic(context, profilePicUri, holder.profilePic);
         } else {
             holder.profilePic.setImageResource(R.drawable.person_icon);
         }
+
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, ChatActivity.class);
             FirebaseUtil.passUserModelAsIntent(intent, user);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            // Ghi log về dữ liệu trong intent
+
             String userId = intent.getStringExtra("userId");
             if (userId != null) {
                 Log.d(Constant.TAG, "userId in intent: " + userId);
@@ -62,7 +64,7 @@ public class SearchUserToMessageAdapter extends FirestoreRecyclerAdapter<User, S
     @NonNull
     @Override
     public SearchUserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.search_user_recycler_row,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.mess_search_user_recycler_row,parent,false);
         return new SearchUserViewHolder(view);
     }
 
