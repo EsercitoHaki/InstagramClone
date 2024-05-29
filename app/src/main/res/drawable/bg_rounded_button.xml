@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners android:radius="20dp" /> <!-- Điều này sẽ làm cho các góc tròn -->
+    <solid android:color="#0377D3" /> <!-- Màu nền của nút -->
+</shape>

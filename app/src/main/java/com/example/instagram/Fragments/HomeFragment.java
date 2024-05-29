@@ -2,6 +2,7 @@ package com.example.instagram.Fragments;
 
 import static com.example.instagram.Utils.Constant.POST;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,14 +18,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
-
 import android.view.MenuInflater;
-import android.view.MenuItem;
 
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.instagram.Adapers.PostAdapter;
+import com.example.instagram.ChatRecentActivity1;
 import com.example.instagram.Models.Post;
 import com.example.instagram.R;
 
@@ -51,30 +52,6 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-        setHasOptionsMenu(true);
-        ((AppCompatActivity) requireActivity()).setSupportActionBar(binding.materialToolbar2);
-        // Lấy ra item "message" từ menu và gắn OnClickListener
-        binding.materialToolbar2.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                // Kiểm tra nếu item được nhấn là "message"
-                if (item.getItemId() == R.id.message) {
-                    // Log ra khi item "message" được nhấn
-                    Log.d(Constant.TAG, "Item 'message' clicked");
-                    // Tiến hành chuyển đổi fragment
-                    ChatFragment chatFragment = new ChatFragment();
-                    FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.frameLayout, chatFragment);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
-
-                    return true;
-                }
-                return false;
-            }
-        });
-        //
-
         adapter = new PostAdapter(requireContext(), postList);
         binding.postRv.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.postRv.setAdapter(adapter);
@@ -96,8 +73,10 @@ public class HomeFragment extends Fragment {
                         tempList.add(post);
                     }
                 }
+
                 postList.addAll(tempList);
                 adapter.notifyDataSetChanged();
+
                 // Thêm lệnh ghi nhật ký để xem dữ liệu có được lấy và thêm vào postList không
                 Log.d("HomeFragment", "Số lượng bài viết đã lấy: " + postList.size());
             }
@@ -110,7 +89,46 @@ public class HomeFragment extends Fragment {
         inflater.inflate(R.menu.option_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
 
-    }
+        // Lấy ra item "message" từ menu và gắn OnClickListener
+        MenuItem item = menu.findItem(R.id.message);
+//        item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+//            @Override
+//            public boolean onMenuItemClick(MenuItem item) {
+//                // Kiểm tra nếu item được nhấn là "message"
+//                if (item.getItemId() == R.id.message) {
+//                    // Log ra khi item "message" được nhấn
+//                    Log.d(Constant.TAG, "Item 'message' clicked");
+//                    // Tiến hành chuyển đổi fragment
+//                    ChatFragment chatFragment = new ChatFragment();
+//                    FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+//                    transaction.replace(R.id.frameLayout, chatFragment);
+//                    transaction.addToBackStack(null);
+//                    transaction.commit();
+//
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
+        item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                // Kiểm tra nếu item được nhấn là "message"
+                if (item.getItemId() == R.id.message) {
+                    // Log ra khi item "message" được nhấn
+                    Log.d(Constant.TAG, "Item 'message' clicked");
 
+                    Intent intent = new Intent(requireContext(), ChatRecentActivity1.class);
+
+                    // Khởi chạy Activity mới
+                    startActivity(intent);
+
+                    return true;
+                }
+                return false;
+            }
+        });
+
+    }
 
 }

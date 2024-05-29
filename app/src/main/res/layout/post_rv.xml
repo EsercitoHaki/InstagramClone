@@ -59,7 +59,10 @@
             android:id="@+id/caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:textSize="20dp"
+            android:text="TextView"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -97,6 +100,9 @@
             android:id="@+id/number_of_likes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="0 Likes"
+            android:textSize="14sp"
+            android:layout_marginStart="8dp"
+            android:layout_below="@id/like" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
