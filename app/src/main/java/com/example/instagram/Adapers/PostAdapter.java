@@ -3,17 +3,21 @@ package com.example.instagram.Adapers;
 import static com.example.instagram.Utils.Constant.USER_NODE;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.instagram.Models.LikeStatus;
 import com.example.instagram.Models.Post;
 import com.example.instagram.Models.User;
 import com.example.instagram.R;
 import com.example.instagram.databinding.PostRvBinding;
+import com.github.marlonlom.utilities.timeago.TimeAgo;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -40,6 +44,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
+
+        LikeStatus likeStatus = new LikeStatus();
         try {
             String uid = postList.get(holder.getAdapterPosition()).getUid();
             if (uid != null && !uid.isEmpty()) {
@@ -64,9 +70,38 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyHolder> {
         }
 
         Glide.with(context).load(postList.get(holder.getAdapterPosition()).getPostUrl()).placeholder(R.drawable.loading).into(holder.binding.postImage);
-        holder.binding.txttime.setText(postList.get(holder.getAdapterPosition()).getTime());
+        try {
+            String text = TimeAgo.using(Long.parseLong(postList.get(holder.getAdapterPosition()).getTime()));
+            holder.binding.txttime.setText(text);
+        } catch (Exception e) {
+            holder.binding.txttime.setText("");
+        }
         holder.binding.caption.setText(postList.get(holder.getAdapterPosition()).getCaption());
+
+        holder.binding.like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!likeStatus.isLiked()) {
+                    holder.binding.like.setImageResource(R.drawable.heart);
+                    likeStatus.setLiked(true);
+                } else {
+                    holder.binding.like.setImageResource(R.drawable.love);
+                    likeStatus.setLiked(false);
+                }
+            }
+        });
+
+        holder.binding.share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("text/plain");
+                i.putExtra(Intent.EXTRA_TEXT, postList.get(holder.getAdapterPosition()).getPostUrl());
+                context.startActivity(i);
+            }
+        });
     }
+
 
 
     @Override
