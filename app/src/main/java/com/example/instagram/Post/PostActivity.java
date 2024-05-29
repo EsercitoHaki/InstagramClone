@@ -99,7 +99,7 @@ public class PostActivity extends AppCompatActivity {
                                 if (user != null) {
                                     String postUrl = imageUrl;
                                     String caption = binding.caption.getText().toString();
-                                    String name = user.getName().toString();
+                                    String name = FirebaseAuth.getInstance().getCurrentUser().getUid();
                                     String time = Long.toString(System.currentTimeMillis());
 
                                     Post post = new Post(postUrl, caption, name, time);

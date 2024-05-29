@@ -1,8 +1,10 @@
 package com.example.instagram.Models;
 
 public class Post {
-    private String postUrl, caption, name, time;
+    private String postUrl, caption, uid, time;
+    public Post() {
 
+    }
     public Post(String postUrl, String caption) {
         this.postUrl = postUrl;
         this.caption = caption;
@@ -15,16 +17,16 @@ public class Post {
     public Post(String postUrl, String caption, String name, String time) {
         this.postUrl = postUrl;
         this.caption = caption;
-        this.name = name;
+        this.uid = name;
         this.time = time;
     }
 
-    public String getName() {
-        return name;
+    public String getUid() {
+        return uid;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public String getTime() {
