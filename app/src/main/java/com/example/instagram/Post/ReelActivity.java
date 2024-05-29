@@ -2,6 +2,7 @@ package com.example.instagram.Post;
 
 import static com.example.instagram.Utils.Constant.REEL;
 import static com.example.instagram.Utils.Constant.REEL_FOLDER;
+import static com.example.instagram.Utils.Constant.USER_NODE;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -16,11 +17,13 @@ import android.view.View;
 
 import com.example.instagram.HomeActivity;
 import com.example.instagram.Models.Reel;
+import com.example.instagram.Models.User;
 import com.example.instagram.R;
 import com.example.instagram.Utils.Utils;
 import com.example.instagram.databinding.ActivityReelBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ReelActivity extends AppCompatActivity {
@@ -87,22 +90,33 @@ public class ReelActivity extends AppCompatActivity {
         binding.btnPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Reel reel = new Reel(videoUrl, binding.caption.getText().toString());
-                FirebaseFirestore.getInstance().collection(REEL).document().set(reel)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                FirebaseFirestore.getInstance().collection(FirebaseAuth.getInstance().getCurrentUser().getUid() + REEL)
-                                        .document().set(reel)
-                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void unused) {
-                                                startActivity(new Intent(ReelActivity.this, HomeActivity.class));
-                                                finish();
-                                            }
-                                        });
-                            }
-                        });
+                FirebaseFirestore.getInstance().collection(USER_NODE).document(FirebaseAuth.getInstance().getCurrentUser().getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        User user = documentSnapshot.toObject(User.class);
+                        Reel reel = new Reel(videoUrl, binding.caption.getText().toString(), user.getImage());
+                        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+                        firestore.collection("REEL").document()
+                                .set(reel)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        String currentUserUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+                                        firestore.collection(currentUserUid + "REEL").document()
+                                                .set(reel)
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        startActivity(new Intent(ReelActivity.this, HomeActivity.class));
+                                                        finish();
+                                                    }
+                                                });
+                                    }
+                                });
+                    }
+                });
+
             }
         });
     }
