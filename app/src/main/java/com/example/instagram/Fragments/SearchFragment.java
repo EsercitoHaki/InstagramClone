@@ -22,13 +22,8 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 public class SearchFragment extends Fragment {
 
-
-    EditText searchInput;
-    ImageButton searchButton;
-    ImageButton backButton;
-    RecyclerView recyclerView;
-
-    SearchUserToMessageAdapter adapter;
+    private FragmentSearchBinding binding;
+    private SearchUserToMessageAdapter adapter;
 
     public SearchFragment() {
     }
@@ -36,25 +31,19 @@ public class SearchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        FragmentSearchBinding binding = FragmentSearchBinding.inflate(inflater, container, false);
+        binding = FragmentSearchBinding.inflate(inflater, container, false);
         View rootView = binding.getRoot();
 
-        searchInput = binding.seachUsernameInput;
-        searchButton = binding.searchUserBtn;
-//        backButton = binding.backBtn; // Un-comment this line
-        recyclerView = binding.searchUserRecyclerView;
+        binding.seachUsernameInput.requestFocus();
 
-        searchInput.requestFocus();
-
-//        backButton.setOnClickListener(v -> {
+//        binding.backBtn.setOnClickListener(v -> {
 //            requireActivity().onBackPressed();
 //        });
 
-        searchButton.setOnClickListener(v -> {
-            String searchTerm = searchInput.getText().toString();
-            if(searchTerm.isEmpty() || searchTerm.length() < 3) {
-                searchInput.setError("Invalid Username");
+        binding.searchUserBtn.setOnClickListener(v -> {
+            String searchTerm = binding.seachUsernameInput.getText().toString();
+            if (searchTerm.isEmpty() || searchTerm.length() < 3) {
+                binding.seachUsernameInput.setError("Invalid Username");
                 return;
             }
             setupSearchRecyclerView(searchTerm);
@@ -72,11 +61,10 @@ public class SearchFragment extends Fragment {
                 .setQuery(query, User.class).build();
 
         adapter = new SearchUserToMessageAdapter(options, requireContext());
-        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-        recyclerView.setAdapter(adapter);
+        binding.searchUserRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        binding.searchUserRecyclerView.setAdapter(adapter);
         adapter.startListening();
     }
-
 
     @Override
     public void onStart() {
@@ -99,3 +87,83 @@ public class SearchFragment extends Fragment {
             adapter.startListening();
     }
 }
+
+//public class SearchFragment extends Fragment {
+//
+//
+//    EditText searchInput;
+//    ImageButton searchButton;
+//    ImageButton backButton;
+//    RecyclerView recyclerView;
+//
+//    SearchUserToMessageAdapter adapter;
+//
+//    public SearchFragment() {
+//    }
+//
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//                             Bundle savedInstanceState) {
+//        // Inflate the layout for this fragment
+//        FragmentSearchBinding binding = FragmentSearchBinding.inflate(inflater, container, false);
+//        View rootView = binding.getRoot();
+//
+//        searchInput = binding.seachUsernameInput;
+//        searchButton = binding.searchUserBtn;
+////        backButton = binding.backBtn; // Un-comment this line
+//        recyclerView = binding.searchUserRecyclerView;
+//
+//        searchInput.requestFocus();
+//
+////        backButton.setOnClickListener(v -> {
+////            requireActivity().onBackPressed();
+////        });
+//
+//        searchButton.setOnClickListener(v -> {
+//            String searchTerm = searchInput.getText().toString();
+//            if(searchTerm.isEmpty() || searchTerm.length() < 3) {
+//                searchInput.setError("Invalid Username");
+//                return;
+//            }
+//            setupSearchRecyclerView(searchTerm);
+//        });
+//
+//        return rootView;
+//    }
+//
+//    void setupSearchRecyclerView(String searchTerm) {
+//        Query query = FirebaseUtil.allUserCollectionReference()
+//                .whereGreaterThanOrEqualTo("name", searchTerm)
+//                .whereLessThanOrEqualTo("name", searchTerm + '\uf8ff');
+//
+//        FirestoreRecyclerOptions<User> options = new FirestoreRecyclerOptions.Builder<User>()
+//                .setQuery(query, User.class).build();
+//
+//        adapter = new SearchUserToMessageAdapter(options, requireContext());
+//        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+//        recyclerView.setAdapter(adapter);
+//        adapter.startListening();
+//    }
+//
+//
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        if (adapter != null)
+//            adapter.startListening();
+//    }
+//
+//    @Override
+//    public void onStop() {
+//        super.onStop();
+//        if (adapter != null)
+//            adapter.stopListening();
+//    }
+//
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        if (adapter != null)
+//            adapter.startListening();
+//    }
+//}
