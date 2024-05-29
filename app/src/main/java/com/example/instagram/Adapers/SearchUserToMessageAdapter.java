@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.instagram.ChatActivity;
 import com.example.instagram.Models.User;
 import com.example.instagram.R;
+import com.example.instagram.Utils.Constant;
 import com.example.instagram.Utils.FirebaseUtil;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -53,9 +54,9 @@ public class SearchUserToMessageAdapter extends FirestoreRecyclerAdapter<User, S
             // Ghi log về dữ liệu trong intent
             String userId = intent.getStringExtra("userId");
             if (userId != null) {
-                Log.d("LoginActivity", "User ID in intent: " + userId);
+                Log.d(Constant.TAG, "userId in intent: " + userId);
             } else {
-                Log.d("LoginActivity", "User ID not found in intent.");
+                Log.d(Constant.TAG, "userId not found.");
             }
             context.startActivity(intent);
         });

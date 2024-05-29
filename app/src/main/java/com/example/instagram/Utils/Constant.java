@@ -7,4 +7,6 @@ public class Constant {
     public static final String REEL_FOLDER="ReelImages";
     public static final String POST="Post";
     public static final String REEL="Reel";
+    public static final String TAG="Insta_Check_by_Vinh";
+
 }

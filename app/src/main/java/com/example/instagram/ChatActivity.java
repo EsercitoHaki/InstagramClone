@@ -21,6 +21,7 @@ import com.example.instagram.Adapers.ChatRecyclerAdapter;
 import com.example.instagram.Models.ChatMessage;
 import com.example.instagram.Models.Chatroom;
 import com.example.instagram.Models.User;
+import com.example.instagram.Utils.Constant;
 import com.example.instagram.Utils.FirebaseUtil;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -69,16 +70,15 @@ public class ChatActivity extends AppCompatActivity {
         otherUser = FirebaseUtil.getUserModelFromIntent(getIntent());
 
         if (otherUser != null) {
-            Log.d("Chat", "Name: " + otherUser.getName());
-            Log.d("Chat", "id: " + otherUser.getUserId());
+            Log.d(Constant.TAG, "Name from item: " + otherUser.getName());
+            Log.d(Constant.TAG, "userId from item: " + otherUser.getUserId());
         } else {
-            Log.d("Chat", "No user data received from Intent.");
+            Log.d(Constant.TAG, "No user data received from Intent");
         }
 
-        Log.d("Chat", "FirebaseUtil.currentUserId(): " + FirebaseUtil.currentUserId());
-        Log.d("Chat", "otherUser.getUserId(): " + otherUser.getUserId());
+        Log.d(Constant.TAG, "currentuserId from Firebase:  " + FirebaseUtil.currentUserId());
         chatroomId = FirebaseUtil.getChatroomId(FirebaseUtil.currentUserId(),otherUser.getUserId());
-        Log.d("Chat", "ChatroomId: " + chatroomId);
+        Log.d(Constant.TAG, "ChatroomId: " + chatroomId);
 
         messageInput = findViewById(R.id.chat_message_input);
         sendMessageBtn = findViewById(R.id.message_send_btn);

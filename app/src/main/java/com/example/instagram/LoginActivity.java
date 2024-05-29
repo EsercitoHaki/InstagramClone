@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.instagram.Models.User;
+import com.example.instagram.Utils.Constant;
 import com.example.instagram.Utils.FirebaseUtil;
 import com.example.instagram.databinding.ActivityLoginBinding;
 import com.example.instagram.databinding.ActivitySignUpBinding;
@@ -56,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
                                         if (firebaseUser != null) {
                                             // Lấy userId của người dùng hiện tại
                                             String userId = firebaseUser.getUid();
-                                            Log.d("LoginActivity", "User ID: " + userId);
+                                            Log.d(Constant.TAG, "User ID: " + userId);
                                             // Lấy thông tin người dùng từ Firestore
                                             DocumentReference userDocument = FirebaseUtil.currentUserDetails();
                                             userDocument.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -81,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                                                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                         @Override
                                                                         public void onSuccess(Void aVoid) {
-                                                                            Log.d("LoginActivity", "User info updated in Firestore successfully");
+                                                                            Log.d(Constant.TAG, "User info updated in Firestore successfully");
                                                                             // Chuyển đến HomeActivity
                                                                             startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                                                                             finish();
@@ -90,16 +91,16 @@ public class LoginActivity extends AppCompatActivity {
                                                                     .addOnFailureListener(new OnFailureListener() {
                                                                         @Override
                                                                         public void onFailure(@NonNull Exception e) {
-                                                                            Log.e("LoginActivity", "Error updating user info in Firestore", e);
+                                                                            Log.e(Constant.TAG, "Error updating user info in Firestore", e);
                                                                             // Đăng nhập thất bại, hiển thị thông báo lỗi
                                                                             Toast.makeText(LoginActivity.this, "Error updating user info in Firestore", Toast.LENGTH_SHORT).show();
                                                                         }
                                                                     });
                                                         } else {
-                                                            Log.d("LoginActivity", "No such document");
+                                                            Log.d(Constant.TAG, "No such document");
                                                         }
                                                     } else {
-                                                        Log.e("LoginActivity", "Error getting user document", task.getException());
+                                                        Log.e(Constant.TAG, "Error getting user document", task.getException());
                                                         // Đăng nhập thất bại, hiển thị thông báo lỗi
                                                         Toast.makeText(LoginActivity.this, "Error getting user document", Toast.LENGTH_SHORT).show();
                                                     }
