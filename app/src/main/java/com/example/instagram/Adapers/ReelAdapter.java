@@ -4,6 +4,7 @@ import android.content.Context;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
@@ -62,6 +63,7 @@ public class ReelAdapter extends RecyclerView.Adapter<ReelAdapter.ViewHolder> {
         holder.binding.videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
+                holder.binding.progressBar.setVisibility(View.GONE);
                 mp.setLooping(true);
                 holder.binding.videoView.start();
             }

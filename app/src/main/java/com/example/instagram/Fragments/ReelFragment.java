@@ -2,21 +2,17 @@ package com.example.instagram.Fragments;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import com.example.instagram.Adapers.ReelAdapter;
 import com.example.instagram.Models.Reel;
 import com.example.instagram.databinding.FragmentReelBinding;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-
 import org.checkerframework.checker.nullness.qual.NonNull;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import javax.annotation.Nullable;
@@ -55,7 +51,6 @@ public class ReelFragment extends Fragment {
                 Toast.makeText(requireContext(), "No data available", Toast.LENGTH_SHORT).show();
             }
         }).addOnFailureListener(e -> {
-            // Log the error if fetching data fails
             Log.e("ReelFragment", "Error fetching data from Firestore", e);
         });
 
