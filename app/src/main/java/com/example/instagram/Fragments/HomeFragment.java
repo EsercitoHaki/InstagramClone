@@ -5,36 +5,31 @@ import static com.example.instagram.Utils.Constant.POST;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-<<<<<<< HEAD
+
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-=======
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
->>>>>>> master
+
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+
 import android.view.MenuInflater;
-<<<<<<< HEAD
 import android.view.MenuItem;
-=======
->>>>>>> master
+
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.instagram.Adapers.PostAdapter;
 import com.example.instagram.Models.Post;
 import com.example.instagram.R;
-<<<<<<< HEAD
+
 import com.example.instagram.Utils.Constant;
 import com.example.instagram.databinding.FragmentHomeBinding;
-
-public class HomeFragment extends Fragment {
-
-=======
 import com.example.instagram.databinding.FragmentHomeBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -47,23 +42,17 @@ import java.util.List;
 public class HomeFragment extends Fragment {
     private ArrayList<Post> postList = new ArrayList<>();
     private PostAdapter adapter;
->>>>>>> master
     public FragmentHomeBinding binding;
     public HomeFragment() {
 
     }
-<<<<<<< HEAD
-=======
 
->>>>>>> master
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-<<<<<<< HEAD
         setHasOptionsMenu(true);
         ((AppCompatActivity) requireActivity()).setSupportActionBar(binding.materialToolbar2);
-
         // Lấy ra item "message" từ menu và gắn OnClickListener
         binding.materialToolbar2.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -85,8 +74,7 @@ public class HomeFragment extends Fragment {
             }
         });
         //
-        return binding.getRoot();
-=======
+
         adapter = new PostAdapter(requireContext(), postList);
         binding.postRv.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.postRv.setAdapter(adapter);
@@ -108,10 +96,8 @@ public class HomeFragment extends Fragment {
                         tempList.add(post);
                     }
                 }
-
                 postList.addAll(tempList);
                 adapter.notifyDataSetChanged();
-
                 // Thêm lệnh ghi nhật ký để xem dữ liệu có được lấy và thêm vào postList không
                 Log.d("HomeFragment", "Số lượng bài viết đã lấy: " + postList.size());
             }
@@ -119,17 +105,12 @@ public class HomeFragment extends Fragment {
 
         return binding.getRoot();
     }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.option_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.option_menu, menu);
-        super.onCreateOptionsMenu(menu, inflater);
->>>>>>> master
     }
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.option_menu, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
+
 
 }
