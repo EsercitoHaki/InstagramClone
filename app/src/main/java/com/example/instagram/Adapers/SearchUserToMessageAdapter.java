@@ -19,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.instagram.ChatActivity;
 import com.example.instagram.Models.User;
 import com.example.instagram.R;
-import com.example.instagram.Utils.AndroidUtil;
 import com.example.instagram.Utils.FirebaseUtil;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -43,14 +42,13 @@ public class SearchUserToMessageAdapter extends FirestoreRecyclerAdapter<User, S
         }
         if (user.getImage() != null && !user.getImage().isEmpty()) {
             Uri profilePicUri = Uri.parse(user.getImage());
-            AndroidUtil.setProfilePic(context, profilePicUri, holder.profilePic);
+            FirebaseUtil.setProfilePic(context, profilePicUri, holder.profilePic);
         } else {
             holder.profilePic.setImageResource(R.drawable.person_icon);
         }
-
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, ChatActivity.class);
-            AndroidUtil.passUserModelAsIntent(intent, user);
+            FirebaseUtil.passUserModelAsIntent(intent, user);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             // Ghi log về dữ liệu trong intent
             String userId = intent.getStringExtra("userId");
@@ -59,7 +57,7 @@ public class SearchUserToMessageAdapter extends FirestoreRecyclerAdapter<User, S
             } else {
                 Log.d("LoginActivity", "User ID not found in intent.");
             }
-            context.startActivity(intent); // Thay "this" thành "context" ở đây
+            context.startActivity(intent);
         });
     }
 

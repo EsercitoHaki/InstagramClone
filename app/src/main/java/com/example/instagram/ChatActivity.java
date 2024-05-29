@@ -21,7 +21,6 @@ import com.example.instagram.Adapers.ChatRecyclerAdapter;
 import com.example.instagram.Models.ChatMessage;
 import com.example.instagram.Models.Chatroom;
 import com.example.instagram.Models.User;
-import com.example.instagram.Utils.AndroidUtil;
 import com.example.instagram.Utils.FirebaseUtil;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -67,7 +66,7 @@ public class ChatActivity extends AppCompatActivity {
             return insets;
         });
         //get UserModel
-        otherUser = AndroidUtil.getUserModelFromIntent(getIntent());
+        otherUser = FirebaseUtil.getUserModelFromIntent(getIntent());
 
         if (otherUser != null) {
             Log.d("Chat", "Name: " + otherUser.getName());
@@ -92,7 +91,7 @@ public class ChatActivity extends AppCompatActivity {
                 .addOnCompleteListener(t -> {
                     if(t.isSuccessful()){
                         Uri uri  = t.getResult();
-                        AndroidUtil.setProfilePic(this,uri,imageView);
+                        FirebaseUtil.setProfilePic(this,uri,imageView);
                     }
                 });
 
