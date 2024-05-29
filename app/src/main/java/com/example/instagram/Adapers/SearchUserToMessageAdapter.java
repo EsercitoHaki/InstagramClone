@@ -3,6 +3,7 @@ package com.example.instagram.Adapers;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,12 +32,14 @@ public class SearchUserToMessageAdapter extends FirestoreRecyclerAdapter<User, S
     protected void onBindViewHolder(@NonNull SearchUserViewHolder holder, int position, @NonNull User user) {
         holder.usernameText.setText(user.getName());
         holder.phoneText.setText(user.getEmail());
-        if(user.getEmail().equals(FirebaseUtil.getCurrentUserEmail())) {
+//        if(user.getEmail().equals(FirebaseUtil.getCurrentUserEmail())) {
+//            holder.usernameText.setText(user.getName() + " (Me)");
+//        }
+        Log.d("LoginActivity", "User ID: " + FirebaseUtil.currentUserId());
+
+        if (user.getUserId() != null && user.getUserId().equals(FirebaseUtil.currentUserId())) {
             holder.usernameText.setText(user.getName() + " (Me)");
         }
-//        if(user.getUserId().equals(FirebaseUtil.currentUserId())){
-//            holder.usernameText.setText(user.getName()+" (Me)");
-//        }
 
         if (user.getImage() != null && !user.getImage().isEmpty()) {
             Uri profilePicUri = Uri.parse(user.getImage());

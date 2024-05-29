@@ -25,8 +25,6 @@ public class FirebaseUtil {
         }
     }
 
-
-
     public static boolean isLoggedIn(){
         if(currentUserId()!=null){
             return true;
